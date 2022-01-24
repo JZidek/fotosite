@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+    
+            <nav id="selection">        
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <ul>
+                        <li><p><h3>Vyberte obrázek</h3></p></li>
+                        <li id='form'>{{ form.as_p}}</li>
+                        <li><p><h3>poloha loga v obrázku (%)</h3></p></li>
+                        <li>X:  <input class="perc" type="text" name="x">    Y:  <input class="perc" type="text" name="y"></li>
+                        <li><p><h3>formát</h3></p></li>                   
+                        <li><input type="radio" name="format" value="1">320px</li>                   
+                        <li><input type="radio" name="format" value="2">640px</li>                
+                        <li><input type="radio" name="format" value="3">1280px</li>                   
+                        <li><input type="radio" name="format" value="4">1920px</li>      
+                        <li><button type="submit" name="new" style="margin-top: 5%;">OK</button></li>
+                    </ul> 
+                </form>
+            </nav>
+            
+            <div id="imgs">
+                <div class="row start-xs">
+                    {% if err != '' %}
+                        <p>{{err}}</p>
+                    {% endif %}
+                    {% if img != '' %}
+                        <figure>
+                            <figcaption>logo</figcaption>
+                            <img src="data:image/jpg;base64,{{img}}">
+                        </figure>
+                    {% endif %}
+                </div>
+            </div>
+
+{% endblock %}
+

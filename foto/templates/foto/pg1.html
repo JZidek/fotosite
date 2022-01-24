@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+    
+            <nav id="selection">        
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <ul>
+                        <li><p><h3>Vyberte obrázek</h3></p></li>
+                        <li>{{ form.as_p }}</li>                                             
+                        <li><p><h3>úpravy</h2></p></li>                     
+                        <li><input type="radio" name="uprava" value="1">Černobílá fotka</li>                   
+                        <li><input type="radio" name="uprava" value="2">Prahové odstíny černobílé (max 1280)</li>  
+                        <li><input type="range" name="gray_vol" min="0" max="255" value="0" oninput="amm.value=gray_vol.value"><output id="amm" name="amm" for="gray_vol">0</output></li>   
+                        <li><input type="radio" name="uprava" value="7">Prahové odstíny barevné(max 1280)</li>     
+                        <li><input type="range" name="col_vol" min="0" max="255" value="0" oninput="amm_c.value=col_vol.value"><output id="amm_c" name="amm_c" for="col_vol">0</output></li>      
+                        <li><input type="radio" name="uprava" value="3">Naklonění</li>   
+                        <li>Rotace<input type="radio" name="uprava" value="4">+90 <input type="radio" name="uprava" value="5">-90 <input type="radio" name="uprava" value="6">+180</li>
+
+                        <li><p><h3>formát</h3></p></li>                   
+                        <li><input type="radio" name="format" value="1">320px</li>                   
+                        <li><input type="radio" name="format" value="2">640px</li>                
+                        <li><input type="radio" name="format" value="3">1280px</li>                   
+                        <li><input type="radio" name="format" value="4">1920px</li>           
+                        <li><input type="range" name="format_self" min="0" max="1920" style="width: 250px;" value="0" oninput="val.value=format_self.value"><output id="val" name="val" for="format_self">0</output>px</li>   
+                        <li><button type="submit" name="new" style="margin-top: 5%;">OK</button></li>
+                    </ul> 
+                </form>
+            </nav>
+            
+            
+            <!--
+            {% if img_obj %}
+                <h3>Succesfully uploaded 1: {{img_obj.title}}</h3>
+                <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
+                <img src={% static img_gray %} alt="">
+                <img src={% static img_thres %} alt="">
+                <img src={{gray.image}} alt="connect" style="max-height:300px">s
+            {% endif %}
+            -->
+            <div id="imgs">
+                <div class="row ">
+                    {% if origin != '' %}
+                        <figure>
+                            <figcaption>Originál</figcaption>
+                            <img src="data:image/jpg;base64,{{origin}}">
+                        </figure>
+                    {% endif %}
+                    {% if img != '' %}
+                        <figure style="padding-bottom: 150px;">
+                            <figcaption>Úprava</figcaption>
+                            <img src="data:image/jpg;base64,{{img}}">
+                        </figure>
+                    {% endif %}
+                </div>
+            </div>
+{% endblock %}
+

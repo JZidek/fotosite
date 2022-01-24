@@ -1,0 +1,29 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+        <title>foto</title>
+        <link rel="stylesheet" href="{% static 'slevy/styl.css' %}" type="text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+
+    </head>
+    <body>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+             {{ form.as_p }}
+            <button type="submit">Upload</button>
+          </form>
+          
+          {% if img_obj %}
+            <h3>Succesfully uploaded : {{img_obj.title}}</h3>
+            <img src="{{ img_obj.image.url}}" alt="image" style="max-height:300px">
+          {% endif %}
+    </body>
+
+</html>
+
+

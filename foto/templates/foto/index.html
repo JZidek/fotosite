@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+        <title>foto</title>
+        <link rel="stylesheet" href="{% static 'foto/styl.css' %}" type="text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <nav>
+                <ul class="center-xs uvod">
+                    <li class="center-xs uvod">Vítejte na mých webových stránkách sloužících k úpravě fotek</li>
+                </ul>
+            </nav>
+        </header>
+        <div class="row start-xs">
+            <div class="col-sm-2" id="selection">
+                <form method="post" enctype="multipart/form-data">
+                
+                    {% csrf_token %}
+                    <ul>
+                        <li>{{ form.as_p }}</li>
+                        <li><p>formát</p></li>                   
+                        <li><input type="checkbox" name="320">320px</li>                   
+                        <li><input type="checkbox" name="640">640px</li>                
+                        <li><input type="checkbox" name="1280">1280px</li>                   
+                        <li><input type="checkbox" name="1920">1920px</li>                     
+                        <li><p>úpravy</p></li>                     
+                        <li><input type="checkbox" name="gray_ch">Černobílá fotka</li>                   
+                        <li><input type="checkbox" name="thres_ch">Prahové odstíny</li>              
+                        <li><input type="checkbox" name="rot_ch">Naklonění</li>                    
+                        <li><button type="submit" name="new">OK</button></li>
+                    </ul> 
+                </form>
+            </div>
+            
+            
+            <!--
+            {% if img_obj %}
+                <h3>Succesfully uploaded 1: {{img_obj.title}}</h3>
+                <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
+                <img src={% static img_gray %} alt="">
+                <img src={% static img_thres %} alt="">
+                <img src={{gray.image}} alt="connect" style="max-height:300px">s
+            {% endif %}
+            -->
+            <div class="col-sm-12" id="imgs">
+                <div class="row start-xs">
+                    {% if origin != '' %}
+                        <figure>
+                            <figcaption>Originál</figcaption>
+                            <img src="data:image/jpg;base64,{{origin}}">
+                        </figure>
+                    {% endif %}
+                    {% if gray != '' %}
+                        <figure>
+                         <figcaption>Černobílá fotka</figcaption>
+                        <img src="data:image/jpg;base64,{{gray}}">
+                        </figure>
+                    {% endif %}
+                    {% if thres != '' %}
+                        <figure>
+                            <figcaption>Prahové odstíny</figcaption>
+                            <img src="data:image/jpg;base64,{{thres}}">
+                        </figure>
+                    {% endif %}
+                    {% if rot_img != '' %}
+                        <figure>
+                            <figcaption>Naklonění</figcaption>
+                            <img src="data:image/jpg;base64,{{rot_img}}">
+                        </figure>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="center-xs">
+                © JZid, 2021
+            </div>
+        </footer>
+    </body>
+
+</html>
+
+

@@ -1,0 +1,30 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Automatizace</title>
+        <link rel="stylesheet" type="text/css" href="{% static '/prezentace/styl.css' %}" >
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" />
+        <meta charset="utf-8">
+
+    </head>
+    <body id="bg" style="background-image: url('{% static "prezentace/pic4.jpg"%}');"></body>
+        <div id="d" class="row center-xs" style="background-image: url('{% static "prezentace/pic_line1.jpg"%}');">
+            <div class="point col-xs-2"><a href="#uvod">DOMU</a></div>
+            <div class="point col-xs-2"><a href='#plc'>PLC</a></div>
+            <div class="point col-xs-2"><a href='#hmi'>HMI</a></div>
+            <div class="point col-xs-2"><a href='#data'>DATA</a></div>
+            <div class="point col-xs-2"><a href="#simulace">SIMULACE</a></div>
+            <div class="point col-xs-2"><a href='#kontakt'>KONTAKT</a></div>
+        </div>
+
+        <article>
+            {% block content %}
+
+            {% endblock %}
+        </article>
+    </body>
+
+</html>
+
+
